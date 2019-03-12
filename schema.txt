@@ -1,0 +1,71 @@
+create sequence company_id_seq;
+create table company (
+   company_id bigint default nextval('company_id_seq') 
+  ,company_name varchar(100)
+  ,add1 varchar(100)
+  ,add2 varchar(100)
+  ,contact1_number varchar(15)
+  ,contact1_name varchar(100)
+  ,contact2_number varchar(15)
+  ,contact2_name varchar(100)
+  ,state smallint
+  ,postcode varchar(10)
+  ,constraint pk_company primary key(company_id)
+);
+
+create sequence person_id_seq;
+create table person (
+  person_id bigint default nextval('person_id_seq')
+  ,person_name varchar(100)
+  ,add1 varchar(100)
+  ,add2 varchar(100)
+  ,contact1_number varchar(15)
+  ,contact1_name varchar(100)
+  ,constraint pk_person primary key(person_id)
+);
+
+create sequence grouping_id_seq;
+create table grouping (
+  group_id bigint default nextval('grouping_id_seq') 
+  ,group_type smallint
+  ,group_name varchar(50)
+  ,constraint pk_grouping primary key(group_id)
+);
+
+create table group_member (
+  group_id bigint
+  ,member_type smallint
+  ,member_id bigint
+  ,constraint pk_group_member primary key(group_id,member_type,member_id)
+); 
+
+create sequence file_id_seq;
+create table file (
+  file_id bigint default nextval('file_id_seq')
+  ,file_type smallint
+  ,file_deadline timestamptz
+  ,group_id int references grouping(group_id)
+  ,constraint pk_file primary key (file_id)
+);
+
+create table cycle_annual (
+  year smallint
+  ,file_id smallint references file(file_id)
+  ,date_create timestamptz
+  ,date_engage timestamptz, is_engaged bit
+  ,date_work_start timestamptz, is_started bit
+  ,date_work_end timestamptz, is_ended bit
+  ,date_target_end timestamptz, is_overdue bit 
+  ,constraint pk_cycle_annual primary key(year,file_id)
+);
+
+
+
+-- company page
+-- person page
+-- file page
+-- create for month deadline
+-- grouping group member drop down type
+
+
+
