@@ -4,38 +4,28 @@
   </cffunction>
 
   <cffunction name=dsp_companySave access="public" returntype="any" output="false">
-    <cfsavecontent variable="temp">
-      <cfoutput>
-        <div>
-          <cfmodule template="/template/navigation.cfm">
-          <div class="content">
-            testing company page
-          </div>
-        </div>
-      </cfoutput>
+    <cfsavecontent variable="temp"> 
+temp ccc
     </cfsavecontent>
-
     <cfset content = {}>
     <cfset content.type = "text/html">
-    <cfset content.payload = application.cache.twrapper.baseShell(temp)>
+    <cfset content.payload = 
+      application.cache.twrapper.baseShell(
+        application.cache.twrapper.navShell(temp)
+      )>
     <cfreturn content>
   </cffunction>
 
   <cffunction name=dsp_personSave access="public" returntype="any" output="false">
-    <cfsavecontent variable="temp">
-      <cfoutput>
-        <div>
-          <cfmodule template="/template/navigation.cfm">
-          <div class="content">
-            testing person page
-          </div>
-        </div>
-      </cfoutput>
+    <cfsavecontent variable="temp"> 
+temp ppp
     </cfsavecontent>
-
     <cfset content = {}>
     <cfset content.type = "text/html">
-    <cfset content.payload = application.cache.twrapper.baseShell(temp)>
+    <cfset content.payload = 
+      application.cache.twrapper.baseShell(
+        application.cache.twrapper.navShell(temp)
+      )>
     <cfreturn content>
   </cffunction>
 
