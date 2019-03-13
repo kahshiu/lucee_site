@@ -6,7 +6,23 @@
   <cffunction access="public" name="home" returntype="struct" output=false description="">
     <cfsavecontent variable="temp">
       <cfoutput>
-hello
+
+<div>
+  <div class="content">
+    <div>
+      hello
+    </div>
+  </div>
+</div>
+
+<!--- 
+-- company page
+-- person page
+-- file page
+-- create for month deadline
+-- grouping group member drop down type
+ --->
+
       </cfoutput>
     </cfsavecontent>
 
