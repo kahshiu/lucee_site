@@ -24,10 +24,6 @@
       <cfset _path = ["lib","fwError"]>
       <cfset _fn = "invalidPath">
 
-    <cfelseif listFindNocase(variables.dirs[_path[1]],arguments.pathType) eq 0>
-      <cfset _path = ["lib","fwError"]>
-      <cfset _fn = "deniedPath">
-
     <cfelseif not application.cache.utils.isFileExists(_path,"cfc")>
       <cfset _path = ["lib","fwError"]>
       <cfset _fn = "invalidPath">
@@ -35,6 +31,10 @@
     <cfelseif not application.cache.utils.isFnExists(_path,_fn)>
       <cfset _path = ["lib","fwError"]>
       <cfset _fn = "invalidFn">
+
+    <cfelseif listFindNocase(variables.dirs[_path[1]],arguments.pathType) eq 0>
+      <cfset _path = ["lib","fwError"]>
+      <cfset _fn = "deniedPath">
     </cfif>
 
     <cfreturn {path=arrayToList(_path,"."),fn=_fn}>
