@@ -33,6 +33,7 @@
     <!--- altered based on environment --->
     <cfset application.vars = setFwVar()>
     <cfset application.vars.db = "bingo">
+    <cfset application.vars.rooturl = "http://localhost:8888/mysite">
 
     <cfset setFwMapping()>
     <cfset application.cache = cacheFwObject()>
