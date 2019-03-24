@@ -37,7 +37,7 @@
 
     <cfset setFwMapping()>
     <cfset application.cache = cacheFwObject()>
-    <cfset application.cache.twrapper = createObject("component","object.tWrapper").init()>
+    <cfset application.cache.wrap = createObject("component","template.wrap").init()>
   </cffunction>
 
 

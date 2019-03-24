@@ -5,14 +5,17 @@
 
   <cffunction access="public" name="home" returntype="struct" output=false description="">
     <cfsavecontent variable="temp"> 
-temp ccc
+temp home
     </cfsavecontent>
     <cfset content = {}>
     <cfset content.type = "text/html">
     <cfset content.payload = 
-      application.cache.twrapper.baseShell(
-        application.cache.twrapper.navShell(temp)
-      )>
+        application.cache.wrap.html(
+          application.cache.wrap.layout1(
+            application.cache.wrap.navBase()
+            ,temp
+          )
+        )>
     <cfreturn content>
   </cffunction>
   

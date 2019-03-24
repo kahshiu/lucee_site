@@ -5,19 +5,18 @@
 
   <cffunction name=dsp_fileSave access="public" returntype="any" output="false">
     <cfsavecontent variable="temp">
-      <cfoutput>
-        <div>
-          <cfmodule template="/template/navigation.cfm">
-          <div class="content">
-            testing file page
-          </div>
-        </div>
-      </cfoutput>
+        testing file page
     </cfsavecontent>
 
     <cfset content = {}>
     <cfset content.type = "text/html">
-    <cfset content.payload = application.cache.twrapper.baseShell(temp)>
+    <cfset content.payload = 
+        application.cache.wrap.html(
+          application.cache.wrap.layout1(
+            application.cache.wrap.navBase()
+            ,temp
+          )
+        )>
     <cfreturn content>
   </cffunction>
 

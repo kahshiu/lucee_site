@@ -11,9 +11,12 @@ temp help
     <cfset content = {}>
     <cfset content.type = "text/html">
     <cfset content.payload = 
-      application.cache.twrapper.baseShell(
-        application.cache.twrapper.navShell(temp)
-      )>
+        application.cache.wrap.html(
+          application.cache.wrap.layout1(
+            application.cache.wrap.navBase()
+            ,temp
+          )
+        )>
     <cfreturn content>
   </cffunction>
 
