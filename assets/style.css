@@ -1,8 +1,10 @@
-.sidebar {
-  ;width:20%
-  ;float: left
+.sidebar, .aux1, .aux2 {
+  ;width: 20%
 }
-.content {
-  ;width:20%
-  ;float: left
+.title {
+  ;width: 60%
+}
+.main {
+  ;width: 80%
+  ;border-left: 1px dotted #aaa;
 }

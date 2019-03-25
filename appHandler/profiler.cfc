@@ -12,8 +12,11 @@ temp ccc
     <cfset content.payload = 
         application.cache.wrap.html(
           application.cache.wrap.layout1(
-            application.cache.wrap.navBase()
-            ,temp
+            body = temp
+            ,nav = application.cache.wrap.navBase()
+            ,title = "<h2>Temp Home</h2>"
+            ,aux1 = "<h4>username</h4>"
+            ,aux2 = application.cache.wrap.panelSearch()
           )
         )>
     <cfreturn content>
@@ -28,8 +31,11 @@ temp ppp
     <cfset content.payload = 
         application.cache.wrap.html(
           application.cache.wrap.layout1(
-            application.cache.wrap.navBase()
-            ,temp
+            body = temp
+            ,nav = application.cache.wrap.navBase()
+            ,title = "<h2>Temp Home</h2>"
+            ,aux1 = "<h4>username</h4>"
+            ,aux2 = application.cache.wrap.panelSearch()
           )
         )>
     <cfreturn content>
