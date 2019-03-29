@@ -1,0 +1,70 @@
+.sidebar, .aux1 {
+  ;width: 20%
+}
+.aux2 {
+  ;width: 30%
+}
+.title {
+  ;width: 50%
+}
+.main {
+  ;width: 75%
+  ;border-left: 1px dotted #aaa;
+}
+.hidden {
+  display:none
+}
+
+
+.form-title {
+  ;margin-top: 1.2em
+  ;margin-bottom: 0.2em
+  ;font-weight: bold
+}
+.form {
+  ;width: 50%
+  ;float: left
+  ;margin-top: 0.2em
+  ;margin-bottom: 1.2em
+}
+label {
+  ;width: 100%
+  ;display: inline-block
+  ;margin: 0.4em
+}
+label>span {
+  ;width: 35%
+  ;display: inline-block
+}
+label select
+,label input
+,label textarea {
+  ;display: inline-block
+}
+
+
+.tabline {
+  ;border-top: 1px dotted #aaa
+  ;border-bottom: 1px dotted #aaa
+}
+.tabline .tab {
+  ;padding-top: 0.4em
+  ;padding-bottom: 0.4em
+  ;width: fit-content
+  ;display: inline-block
+  ;cursor: pointer
+}
+.tabline {
+  ;border-top: 1px dotted #aaa
+  ;border-bottom: 1px dotted #aaa
+}
+.tabline .tab {
+  ;padding-top: 0.4em
+  ;padding-bottom: 0.4em
+  ;width: fit-content
+  ;display: inline-block
+}
+.tabline .selected {
+  ;background-color: #aaa
+  ;font-style: italic
+}

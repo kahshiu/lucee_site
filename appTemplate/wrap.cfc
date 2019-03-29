@@ -9,6 +9,12 @@
       <cfoutput>
         <form action="">
           <input type="text">
+// TODO: tidy up
+<select id="" name="">
+  <option value="">grouping</option>
+  <option value="">profile</option>
+  <option value="">file</option>
+</select>
           <input type="button" value="Search">
         </form>
       </cfoutput>
@@ -21,6 +27,7 @@
       <cfoutput>
         <ul>
           <li><a href="#application.vars.rootUrl#/?">Home</a></li>
+          <li><a href="#application.vars.rootUrl#/?path=appHandler.grouping&fn=dsp_groupSave">Groupings</a></li>
           <li><a href="#application.vars.rootUrl#/?path=appHandler.domain&fn=dsp_fileSave">Working files</a></li>
           <li><a href="#application.vars.rootUrl#/?path=appHandler.profiler&fn=dsp_companySave">Profiler: Company</a></li>
           <li><a href="#application.vars.rootUrl#/?path=appHandler.profiler&fn=dsp_personSave">Profiler: Person</a></li>
@@ -78,9 +85,15 @@
       <html>
         <head>
           #arguments.head#
-          <link rel="stylesheet" type="text/css" href="assets/grid.css">
-          <link rel="stylesheet" type="text/css" href="assets/screen.css">
-          <link rel="stylesheet" type="text/css" href="assets/style.css"> 
+          <link rel="stylesheet" type="text/css" href="assets/deadSimpleGrid.css">
+          <link rel="stylesheet" type="text/css" href="assets/deadSimpleScreen.css">
+          <link rel="stylesheet" type="text/css" href="assets/ownStyle.css"> 
+
+          <script src="assets/underscore-min.js" charset="utf-8"></script>
+          <script src="assets/hyperHTML.min.js" charset="utf-8"></script>
+          <script src="assets/redux.min.js" charset="utf-8"></script>
+          <script src="assets/redux-saga.min.js" charset="utf-8"></script>
+          <script src="assets/ownJs.js" charset="utf-8"></script>
         </head>
         <body> 
           #arguments.body# 
