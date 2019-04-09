@@ -1,7 +1,78 @@
-create sequence company_id_seq;
-create table company (
-   company_id bigint default nextval('company_id_seq') 
-  ,company_name varchar(100)
+create sequence definition_group_seq;
+create table definition_group (
+  d_group_id bigint default nextval('definition_group_seq')  
+  ,d_group_name varchar(50) not null
+  ,d_group_description varchar(200)
+  ,constraint definition_group_pk primary key (d_group_id)
+);
+
+create sequence definition_item_seq;
+create table definition_item (
+  d_group_id integer not null references definition_group(d_group_id)
+  ,d_item_id bigint default nextval('definition_item_seq')  
+  ,d_item_name varchar(50) not null
+  ,d_item_description varchar(200)
+  ,d_item_va varchar(50)
+  ,d_item_i integer
+  ,constraint definitions_item_pk primary key (d_group_id,d_item_id)
+);
+
+insert into definition_group (d_group_name, d_group_description) values 
+ ('entity_type','type of entity: person/ company')
+,('file_type'  ,'type of file: personal/ company file')
+,('relationship_type'  ,'type of relationship')
+;
+
+insert into definition_item (d_group_id, d_item_name, d_item_description, d_item_i) values
+ (1,'person' ,'entity is person', 1)
+,(1,'company','entity is company', 2)
+
+,(2,'BE form','business employee', 1)
+,(2,'B form' ,'business proprieter', 2)
+,(2,'Sdn. Bhd. file','company file', 3)
+
+,(3,'husband', null, 1)
+,(3,'wife', null, 2)
+,(3,'immediate family', null, 3)
+,(3,'business partner', null, 4)
+,(3,'business associate', null, 5)
+,(3,'business employee', null, 6)
+;
+
+insert into definition_group (d_group_name, d_group_description) values 
+('states','states in MY');
+
+insert into definition_item (d_group_id, d_item_name, d_item_i) values
+ (4, 'Johor'                 ,1)
+,(4, 'Kedah'                 ,2)
+,(4, 'Kelantan'              ,3)
+,(4, 'Malacca'               ,4)
+,(4, 'Negeri Sembilan'       ,5)
+,(4, 'Pahang'                ,6)
+,(4, 'Penang'                ,7)
+,(4, 'Perak'                 ,8)
+,(4, 'Perlis'                ,9)
+,(4, 'Sabah'                 ,11)
+,(4, 'Sarawak'               ,12)
+,(4, 'Selangor'              ,13)
+,(4, 'Terengganu'            ,14)
+,(4, 'Wilayah Kuala Lumpur'  ,15)
+,(4, 'Wilayah Labuan'        ,16)
+,(4, 'Wilayah Putrajaya'     ,17);
+
+insert into definition_group (d_group_name, d_group_description) values 
+('file_status','status for file');
+
+insert into definition_item (d_group_id, d_item_name, d_item_i) values
+(5,'Active',1)
+,(5,'Inactive',2)
+
+
+create sequence entity_id_seq;
+create table entity (
+   entity_id bigint default nextval('entity_id_seq') 
+  ,entity_name varchar(100) not null
+  ,entity_type smallint not null
   ,add1 varchar(100)
   ,add2 varchar(100)
   ,contact1_number varchar(15)
@@ -10,55 +81,56 @@ create table company (
   ,contact2_name varchar(100)
   ,state smallint
   ,postcode varchar(10)
-  ,constraint pk_company primary key(company_id)
-);
-
-create sequence person_id_seq;
-create table person (
-  person_id bigint default nextval('person_id_seq')
-  ,person_name varchar(100)
-  ,add1 varchar(100)
-  ,add2 varchar(100)
-  ,contact1_number varchar(15)
-  ,contact1_name varchar(100)
-  ,constraint pk_person primary key(person_id)
+  ,constraint entity_pk primary key(entity_id)
+  ,constraint entity_uq unique(entity_name)
 );
 
 create sequence grouping_id_seq;
 create table grouping (
   group_id bigint default nextval('grouping_id_seq') 
-  ,group_type smallint
+  ,group_type smallint not null
   ,group_name varchar(50)
-  ,constraint pk_grouping primary key(group_id)
+  ,constraint grouping_pk primary key(group_id)
+  ,constraint grouping_uq unique(group_name)
 );
 
+select * 
+from group_member m 
+inner join entity e on e.entity_id = m. and m.member_type = 2
+where group_id = 
+
 create table group_member (
-  group_id bigint
-  ,member_type smallint
+  group_id bigint references grouping(group_id)
+  ,member_type smallint 
   ,member_id bigint
-  ,constraint pk_group_member primary key(group_id,member_type,member_id)
+  ,member_seq smallint
+  ,constraint group_member_pk primary key(group_id,member_type,member_id)
 ); 
 
 create sequence file_id_seq;
 create table file (
   file_id bigint default nextval('file_id_seq')
+  ,file_name varchar(10)
   ,file_type smallint
   ,file_deadline timestamptz
-  ,group_id int references grouping(group_id)
-  ,constraint pk_file primary key (file_id)
+  ,file_status smallint
+  ,constraint file_pk primary key (file_id)
 );
 
-create table cycle_annual (
-  year smallint
+create sequence file_annual_seq;
+create table file_annual (
+  file_annual_id bigint default nextval('file_annual_seq')
+  ,file_annual_year smallint
+  ,file_annual_create timestamptz
+  ,file_annual_engage timestamptz, is_engaged bit
+  ,file_annual_work_start timestamptz, is_started bit
+  ,file_annual_work_end timestamptz, is_ended bit
+  ,file_annual_target_end timestamptz, is_overdue bit 
   ,file_id smallint references file(file_id)
-  ,date_create timestamptz
-  ,date_engage timestamptz, is_engaged bit
-  ,date_work_start timestamptz, is_started bit
-  ,date_work_end timestamptz, is_ended bit
-  ,date_target_end timestamptz, is_overdue bit 
-  ,constraint pk_cycle_annual primary key(year,file_id)
+  ,constraint file_annual_pk primary key(file_annual_id)
 );
 
+create index file_annual_idx1 on file_annual (file_annual_year,file_annual_id); 
 
 
 -- company page
