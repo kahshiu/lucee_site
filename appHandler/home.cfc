@@ -6,22 +6,13 @@
   <cffunction access="public" name="home" returntype="struct" output=false description="">
     <cfsavecontent variable="temp"> 
     <div>
-      content
+home
     </div>
     </cfsavecontent>
 
     <cfset content = {}>
     <cfset content.type = "text/html">
-    <cfset content.payload = 
-        application.cache.wrap.html(
-          application.cache.wrap.layout1(
-            body = temp
-            ,nav = application.cache.wrap.navBase()
-            ,title = "<h2>Temp Home</h2>"
-            ,aux1 = "<h4>username</h4>"
-            ,aux2 = application.cache.wrap.panelSearch()
-          )
-        )>
+    <cfset content.payload = application.cache.wrap.layout1(temp)>
     <cfreturn content>
   </cffunction>
   

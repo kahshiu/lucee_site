@@ -7,6 +7,13 @@
 .title {
   ;width: 50%
 }
+.appname a {
+  ;text-decoration: none
+  ;color: black
+}
+.appname a:hover {
+  ;color: #0066FF
+}
 .main {
   ;width: 75%
   ;border-left: 1px dotted #aaa;
@@ -15,7 +22,24 @@
   display:none
 }
 
+/* error */
+.debugging {
+  ;font-size: 0.8em 
+}
+.table-head { ;width:20%; font-style: italic }
+.table-body { ;width:80% }
+.indicator { ;font-weight: bold }
+.indicator2 { 
+  ;text-align: right
+  ;font-style: italic 
+}
+.content {
+  ;height: 40%
+  ;overflow: auto
+}
 
+
+/* form */
 .form-title {
   ;margin-top: 1.2em
   ;margin-bottom: 0.2em
@@ -42,7 +66,7 @@ label select
   ;display: inline-block
 }
 
-
+/* component */
 .tabline {
   ;border-top: 1px dotted #aaa
   ;border-bottom: 1px dotted #aaa

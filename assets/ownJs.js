@@ -41,12 +41,12 @@ class Select extends hyperHTML.Component {
     return {
        label: null
       ,name: null
-      ,members: []
+      ,options: []
       ,fnChange: null
     } 
   }
   setName(v) { this.setState({ name: v });}
-  setMembers(v) {  this.setState({ members: v });}
+  setOptions(v) {  this.setState({ options: v });}
   setFnChange(v) {  this.setState({ fnChange: v });}
 
   onchange (e) {
@@ -61,9 +61,9 @@ class Select extends hyperHTML.Component {
         <span>${this.state.label}:</span>
         <select name='${this.state.name}' onchange=${this}> 
 
-          ${_.map(this.state.members,function(e,i,l){
-            var label = [e.name];
-            if(e.label) label.push(" (",e.label,")");
+          ${_.map(this.state.options,function(e,i,l){
+            var label = [e.label];
+            if(e.description) label.push(" (",e.description,")");
 
             return hyperHTML.wire(e)`<option value=${e.val}>${label.join("")}</option>`;
           })}
@@ -135,5 +135,49 @@ class Tabline extends hyperHTML.Component {
         return hyperHTML.wire(e)`<div key=${i} class="${className.join(' ')}">${label.join("")}</div>`
       })}
     </div>`;
+  }
+}
+
+//************************ 
+//components: boxShow ****
+//************************ 
+class BoxShow extends hyperHTML.Component {
+  constructor(init){
+    super();
+    this.setState(init);
+  }
+  get defaultState() {
+    return {
+      eBoxes:[]
+    } 
+  }
+  selectBoxBy(fnEval) {
+    _.each( this.state.eBoxes, function(e,i,l){
+      if(fnEval(e,i,l)){
+        e.classList.add("show")
+        e.classList.remove("hidden")
+      } else {
+        e.classList.remove("show")
+        e.classList.add("hidden")
+      }
+    })
+  }
+  selectBoxByIndex(index) {
+    this.selectBoxBy(function(e,i,l){ return i == index; })
+  }
+  selectBoxById(id) {
+    this.selectBoxBy(function(e,i,l){ return e.id == id; })
+  }
+  setBoxes() {
+    var temp = [];
+    for(var i=0;i<arguments.length;i++) {
+      var e = document.getElementById(arguments[i]);
+      if(e) temp.push(e);
+    }
+    this.setState({eBoxes: temp });
+    this.selectBoxByIndex(0);
+  }
+  render (){
+    return this.html`<div></div>`
   }
 }

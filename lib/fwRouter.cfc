@@ -48,7 +48,7 @@
     <cfset var _args = getHTTPRequestData().method eq "GET"? url: form>
 
     <cfset var _content = _obj[arguments.fn](argumentCollection=_args)>
-    <cfif not structKeyExists(_content,"type")> <cfset _content.type = "html"> </cfif>
+    <cfif not structKeyExists(_content,"type")> <cfset _content.type = "text/html"> </cfif>
     <cfif not structKeyExists(_content,"payload")> <cfset _content.payload = ""> </cfif>
     <cfreturn _content>
   </cffunction>

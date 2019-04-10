@@ -4,7 +4,8 @@
     <cfreturn this>
   </cffunction>
 
-  <cffunction name=panelsearch access="public" returntype="string" output="false">
+<!--- components --->
+  <cffunction name=panelSearch access="public" returntype="string" output="false">
     <cfsavecontent variable="temp">
       <cfoutput>
         <form action="">
@@ -22,15 +23,37 @@
     <cfreturn temp>
   </cffunction>
 
+  <cffunction name=panelTitle access="public" returntype="string" output="false">
+    <cfargument name="username" type="string" required="false" default="">
+    <cfsavecontent variable="temp">
+<style>
+</style>
+      <cfoutput>
+        <h2 class="appname"> <a href="#application.vars.rootUrl#/?path=appHandler.home&fn=home">#application.vars.appname#</a> </h2>
+      </cfoutput>
+    </cfsavecontent>
+
+    <cfreturn temp> 
+  </cffunction>
+
+  <cffunction name=panelLogo access="public" returntype="string" output="false">
+    <cfargument name="username" type="string" required="false" default="">
+    <cfsavecontent variable="temp">
+      <cfoutput>
+        <h3> username </h3>
+      </cfoutput>
+    </cfsavecontent>
+
+    <cfreturn temp> 
+  </cffunction>
+
   <cffunction name=navbase access="public" returntype="string" output="false">
     <cfsavecontent variable="temp">
       <cfoutput>
         <ul>
-          <li><a href="#application.vars.rootUrl#/?">Home</a></li>
           <li><a href="#application.vars.rootUrl#/?path=appHandler.grouping&fn=dsp_groupSave">Groupings</a></li>
           <li><a href="#application.vars.rootUrl#/?path=appHandler.domain&fn=dsp_fileSave">Working files</a></li>
-          <li><a href="#application.vars.rootUrl#/?path=appHandler.profiler&fn=dsp_companySave">Profiler: Company</a></li>
-          <li><a href="#application.vars.rootUrl#/?path=appHandler.profiler&fn=dsp_personSave">Profiler: Person</a></li>
+          <li><a href="#application.vars.rootUrl#/?path=appHandler.profiler&fn=dsp_entitySave">Entity</a></li>
           <li><a href="#application.vars.rootUrl#/?path=appHandler.help&fn=home">Help</a></li>
         </ul>
       </cfoutput>
@@ -38,7 +61,20 @@
     <cfreturn temp>
   </cffunction>
 
+<!--- layout: basic --->
   <cffunction name=layout1 access="public" returntype="string" output="false">
+    <cfargument name="body" type="string" required="true">
+    <cfargument name="nav" type="string" required="false" default=#navBase()#>
+    <cfargument name="title" type="string" required="false" default=#panelTitle()#>
+    <cfargument name="aux1" type="string" required="false" default=#panelLogo()#>
+    <cfargument name="aux2" type="string" required="false" default=#panelSearch()#>
+
+    <cfset var temp = this.skeleton(argumentCollection = arguments)>
+    <cfreturn this.html(temp)>
+  </cffunction>
+
+<!--- layout: skeleton --->
+  <cffunction name=skeleton access="public" returntype="string" output="false">
     <cfargument name="body" type="string" required="false" default="">
     <cfargument name="nav" type="string" required="false" default="">
     <cfargument name="title" type="string" required="false" default="">
@@ -76,6 +112,7 @@
     <cfreturn temp>
   </cffunction>
 
+<!--- html wrapper --->
   <cffunction name="html" access="public" returntype="string" output="false">
     <cfargument name="body" type="string" required="false" default="">  
     <cfargument name="head" type="string" required="false" default="">  

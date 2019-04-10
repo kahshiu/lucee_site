@@ -1,6 +1,12 @@
 <cfcomponent displayname="application extension" extends="fwRouter">
 
-  <cffunction name="setFwVar" access="public" returntype="struct" output="false">
+  <cffunction access="public" name="setFwRequest" returntype="struct" output="false">
+    <cfreturn {
+      error = {}
+    }>
+  </cffunction>
+
+  <cffunction access="public" name="setFwVar" returntype="struct" output="false">
     <cfreturn {
        db = ""
       ,rootUrl = ""
@@ -16,7 +22,7 @@
     <cfset this.mappings["/query"] = expandPath("{web-root-directory}/appQuery")>
   </cffunction>
 
-  <cffunction name="cacheFwObject" access="public" returntype="struct" output="false">
+  <cffunction access="public" name="cacheFwObject" returntype="struct" output="false">
     <cfset var _cache = {}>
     <cfset _cache.utils = createObject("component","utils").init()>
     <cfreturn _cache>
